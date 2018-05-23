@@ -110,11 +110,12 @@ func (sl *Slack) JoinChannel(name string) error {
 }
 
 type Message struct {
-	Type    string `json:"type"`
-	Ts      string `json:"ts"`
-	UserId  string `json:"user"`
-	Text    string `json:"text"`
-	Subtype string `json:"subtype"`
+	Type        string       `json:"type"`
+	Ts          string       `json:"ts"`
+	UserId      string       `json:"user"`
+	Text        string       `json:"text"`
+	Subtype     string       `json:"subtype"`
+	Attachments []Attachment `json:"attachments,omitempty"`
 }
 
 func (msg *Message) Timestamp() *time.Time {
