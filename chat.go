@@ -8,7 +8,7 @@ import (
 )
 
 // API chat.postMessage: Sends a message to a channel.
-func (sl *Slack) ChatPostMessage(channelId string, threadTs string, text string, opt *ChatPostMessageOpt) (*ChatPostMessageAPIResponse, error) {
+func (sl *Slack) ChatPostMessage(channelId string, threadTs string, broadcast string, text string, opt *ChatPostMessageOpt) (*ChatPostMessageAPIResponse, error) {
 	uv, err := sl.buildChatPostMessageUrlValues(opt)
 	if err != nil {
 		return nil, err
@@ -16,7 +16,7 @@ func (sl *Slack) ChatPostMessage(channelId string, threadTs string, text string,
 	uv.Add("channel", channelId)
 	if threadTs != "" {
 		uv.Add("thread_ts", threadTs)
-		uv.Add("reply_broadcast", "true")
+		uv.Add("reply_broadcast", broadcast)
 	}
 
 	body, err := sl.PostRequest(chatPostMessageApiEndpoint, uv, sl.buildRequestBodyForm(text))
