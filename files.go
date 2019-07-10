@@ -76,6 +76,7 @@ type FilesUploadOpt struct {
 	Filepath       string
 	Filetype       string
 	Filename       string
+	ThreadTs       string
 	Title          string
 	InitialComment string
 	Channels       []string
@@ -118,6 +119,9 @@ func (sl *Slack) createFilesUploadRequest(opt *FilesUploadOpt) (*http.Request, e
 	}
 	if opt.Title != "" {
 		uv.Add("title", opt.Title)
+	}
+	if opt.ThreadTs != "" {
+		uv.Add("thread_ts", opt.ThreadTs)
 	}
 	if opt.InitialComment != "" {
 		uv.Add("initial_comment", opt.InitialComment)
